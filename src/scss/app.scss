@@ -1,0 +1,102 @@
+
+@import
+  "components/functions",
+  "components/reset",
+  "components/colors",
+  "components/typhography";
+body{ margin: 0; padding: 0; font-size: 100%; background: $grey-white; }
+.marker { background: $metro51; border-radius: 50%; cursor: pointer; size: 20px; border: 1px solid rgba(black, .3);
+  &.lijn50{ background: $metro50; }
+  &.lijn51{ background: $metro51; }
+  &.lijn52{ background: $metro52; }
+  &.lijn53{ background: $metro53; }
+  &.lijn54{ background: $metro54; }
+  &.overstap{ background: $overstap; }
+};
+main.searched{
+  .marker{ background: $metro51; opacity: .3; size: 15px;
+    &.startpoint, &.endPoint{ background: $metro53; opacity: 1; size: 30px; }
+    &.startpoint{ background: $overstap; opacity: 1; }
+    &.overstopPoint{ background: $metro51; opacity: 1; size: 25px;  }
+    &.tussen{ background: lighten($metro51, 15%); opacity: 1; }
+  }
+}
+.marker.begin{ background: purple; size: 40px; }
+#map{ position: absolute; left: 0; top: 0; width: 70vw; height: 100vh; }
+.planner{ right: 0;
+  &.active{ right: -30vw; }
+}
+.planner, .eindResults{ position: absolute; right: 0; width: 30vw; height: 100vh; display: flex; flex-direction: column; padding: 30px; overflow: scroll; overflow-x: hidden; background-color: $light-grey; transition: .6s ease-in-out;
+  h1{ font-size: rem(24); font-weight: $font-bold; letter-spacing: .5px; line-height: 1.5; color: #343434;}
+  span, p{ padding: 0; font-weight: $font-book; font-size: rem(18); color: #343434; }
+  h3{ font-size: rem(20); font-weight: $font-bold; letter-spacing: .5px; color: #323232; }
+  form{ margin: 60px 0;
+    .inputField{ position: relative; margin-bottom: 45px;
+      &:last-of-type{ margin-bottom: 0; }
+    }
+    input{ width: 100%; box-shadow: none; border: none; height: 45px; background: lighten($grey-white, 2%);  padding: 10px; border: 1px solid black; cursor: auto; color: black; z-index: 0; transition: .4s ease-in-out;
+      &::placeholder{ color: transparent; }
+      &:focus{ background: #FFF;
+        &:placeholder-shown + label{ opacity: .5; }
+      }
+      &[type="submit"]{ cursor: pointer;
+        &:hover, &:focus{ box-shadow: 2px 2px 0px 0px red; }
+      }
+    }
+    label{ position: absolute; top: 0; left: 10px; font-size: 1rem; cursor: auto; transition: $transition; font-weight: $font-bold; color: #777777; letter-spacing: .5px; }
+    input:valid{
+      & + label{ top: -45px; color: $black; }
+    }
+    .results{ position: absolute; top: 45px; max-height: 500px; width: 100%; background: $grey-white; z-index: 1; height: auto;
+      a{ display: block; text-align: left; padding: 15px; color: $black; line-height: 1; font-size: 1rem; font-weight: $font-book; background: $grey-white; border: 1px solid black;
+        &:hover, &:focus{ background: darken($grey-white, 10%); }
+      }
+    }
+    .switchInputFields{ margin: 10px 0 15px; font-size: rem(20); line-height: 1.5; letter-spacing: .5px; font-weight: $font-bold; color: $black; display: block;
+      &:hover, &:focus{ text-decoration: underline; }
+    }
+  }
+}
+.eindResults{ z-index: 1; overflow-x: hidden; display: block; right: -30vw;
+  &.active{ right: 0; }
+  .singleResult{ background: white; padding-bottom: 20px; margin-bottom: 25px;
+    h4{ padding: 10px 15px; font-weight: $font-bold; display: block; border: 1px solid rgba(black, .3); }
+    .stops{ padding: 10px 15px;
+      li{ font-weight: $font-book; font-size: 1rem; line-height: 1; letter-spacing: .5px; color: $black; border-bottom: 1px solid rgba(black, .3);
+        &:first-of-type, &:last-of-type{ font-weight: $font-bold; }
+        &:last-of-type{ border: none; }
+      }
+      .stops_between{ margin: 0; max-height: 9999px; transition: .4s ease-in-out; overflow: hidden;
+        ul{ padding: 0; border-top: 1px solid rgba(black, .5); border-bottom: 1px solid rgba(black, .5); padding: 5px 5px; transition: .4s ease-in-out;
+          li{ border: none; }
+          li:first-of-type, li:last-of-type{ font-weight: $font-book; }
+        }
+        &.inactive{ margin: 0; max-height: 0; height: auto;
+          ul{ border: none; }
+        }
+      }
+    }
+  }
+}
+a{ padding: 10px 0; font-size: rem(18); font-weight: $font-bold; transition: $transition;
+  &:hover, &:focus{ text-decoration: underline; }
+}
+.legenda, .legendaActive{ position: absolute; z-index: 1; left: 0; top: 0; max-width: 350px; background: white; width: 100%; display: flex; flex-direction: column; padding: 20px; display: none;
+  &.inactive{ left: -350px; }
+  span, p{ color: $black; font-size: rem(18); letter-spacing: .5px; line-height: 1; font-weight: $font-bold; padding: 0; }
+  .lijn{ display: flex; flex-direction: row; align-items: center; padding: 10px 0;}
+  span{ display: block; size: 20px; border-radius: 50%; background: blue; margin-right: 5px;
+    &.lijn50{ background: $metro50; }
+    &.lijn51{ background: $metro51; }
+    &.lijn52{ background: $metro52; }
+    &.lijn53{ background: $metro53; }
+    &.lijn54{ background: $metro54; }
+    &.overstap{ background: $overstap; }
+    &.firstStop{ background: $metro53; }
+    &.endstop{  background: $metro50;  }
+    &.tussen{ background: lighten($metro50, 20%); }
+  }
+}
+main{ overflow: hidden; width: 100vw; max-width: 100%; position: relative; display: block; height: 100vh; }
+.mapboxgl-ctrl-bottom-right{ display: none; }
+.mapboxgl-ctrl-bottom-lef{ display: none; }

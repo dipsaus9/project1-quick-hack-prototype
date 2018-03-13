@@ -1,0 +1,29 @@
+$main-font-weights: (
+	"Book": 400,
+	"Bold": 700,
+);
+
+$font-book: map-get($main-font-weights,Book);
+$font-bold: map-get($main-font-weights,Bold);
+
+$main-font: "CircularStd";
+$main-font-name: "CircularStd-";
+$main-font-family: #{$main-font},sans-serif;
+// include main font
+@include font-list($main-font,$main-font-name,$main-font-weights,normal);
+// @include font-include($main-font,$main-font-name,normal,normal);
+
+// headers
+h1, h2,h3,h4,h5,h6{ font-family: $main-font-family; text-align: left; padding: 0; margin: 0; font-weight: $font-bold; color: #000; }
+h1{ font-size: rem(32); line-height: 32px; }
+h2{ font-size: rem(22); line-height: 22px; }
+h3{ font-size: rem(32); line-height: 40px; }
+h4{ font-size: rem(24); line-height: 32px; }
+h5{ font-size: rem(16); line-height: 32px; font-weight: $font-bold; }
+h6{ font-size: rem(14); line-height: 32px; font-weight: $font-bold; }
+
+
+h2{ font-family: $main-font-family; font-size: rem(32); font-weight: $font-bold; line-height: 32px; margin-bottom: 15px; }
+a,p,li,ol,ul,span,blockquote,title,date,h1,h2,h3,h4,h5,button, h6, input, label, option, pre, sup, table, td, th{
+  font-family: $main-font-family; color: #000; font-size: rem(16); letter-spacing: 0px; line-height: 26px; padding: 10px 0px; margin: 0; font-weight: $font-book;
+}
